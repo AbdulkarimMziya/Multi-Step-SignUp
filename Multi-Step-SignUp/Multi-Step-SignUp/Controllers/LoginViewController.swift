@@ -10,11 +10,10 @@ import UIKit
 class LoginViewController: UIViewController {
     
     lazy var mainStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel, NextBtnStack])
+       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel, nextBtnStack])
         stack.axis = .vertical
         stack.alignment = .fill
         stack.spacing = 4
-        stack.backgroundColor = .secondarySystemBackground
         
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -32,7 +31,7 @@ class LoginViewController: UIViewController {
         return stack
     }()
     
-    lazy var NextBtnStack: UIStackView = {
+    lazy var nextBtnStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [nextButton])
         stack.axis = .vertical
         stack.alignment = .fill
@@ -48,6 +47,7 @@ class LoginViewController: UIViewController {
         label.text = "Let's Get Started!"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,6 +57,7 @@ class LoginViewController: UIViewController {
         label.text = "Set up your account credentials."
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -109,9 +110,9 @@ class LoginViewController: UIViewController {
     
     let nextButton: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = .green
+        config.baseBackgroundColor = .limeGreen
         config.baseForegroundColor = .black
-        config.cornerStyle = .medium
+        config.cornerStyle = .large
         //internal padding
         config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20)
         
@@ -129,7 +130,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .greyBackground
         
         addViews()
         setupConstraints()
