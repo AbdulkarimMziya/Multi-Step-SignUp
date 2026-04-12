@@ -10,9 +10,9 @@ import UIKit
 class LoginViewController: UIViewController {
     
     lazy var mainStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel])
+       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,emailField,passwordField])
         stack.axis = .vertical
-        stack.alignment = .center
+        stack.alignment = .fill
         stack.spacing = 8
         stack.backgroundColor = .secondarySystemBackground
         
@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Let's Get Started!"
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,12 +32,45 @@ class LoginViewController: UIViewController {
     let loginSubTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Set up your account credentials."
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    let emailField: UIView = {
+        let header = "Email Address"
+        let placeholder = "example@mail.com"
+        let iconName = "envelope"
+
+        let emailField = CustomTextField()
+        emailField.configure(
+            header: header,
+            placeholder: placeholder,
+            iconName: iconName,
+            isSecure: false
+        )
+        
+        emailField.translatesAutoresizingMaskIntoConstraints = false
+        return emailField
+    }()
     
+    let passwordField: UIView = {
+        let header = "New Password"
+        let placeholder = ""
+        let iconName = "lock"
+
+        let passwordField = CustomTextField()
+        passwordField.configure(
+            header: header,
+            placeholder: placeholder,
+            iconName: iconName,
+            isSecure: false
+        )
+        
+        passwordField.translatesAutoresizingMaskIntoConstraints = false
+        return passwordField
+    }()
     
 
     override func viewDidLoad() {
