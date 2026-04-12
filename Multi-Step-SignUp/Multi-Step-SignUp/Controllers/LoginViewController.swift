@@ -135,6 +135,7 @@ class LoginViewController: UIViewController {
         addViews()
         setupConstraints()
         
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
     func addViews() {
@@ -146,6 +147,14 @@ class LoginViewController: UIViewController {
             mainStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             mainStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
         ])
+    }
+    
+    @objc
+    func nextButtonTapped() {
+        let profileVC = UIViewController()
+        navigationItem.hidesBackButton = true
+        navigationController?.pushViewController(profileVC, animated: true)
+       
     }
 
 
