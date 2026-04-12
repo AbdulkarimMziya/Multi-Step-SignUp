@@ -10,7 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     lazy var mainStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel])
+       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel, NextBtnStack])
         stack.axis = .vertical
         stack.alignment = .fill
         stack.spacing = 4
@@ -32,6 +32,17 @@ class LoginViewController: UIViewController {
         return stack
     }()
     
+    lazy var NextBtnStack: UIStackView = {
+       let stack = UIStackView(arrangedSubviews: [nextButton])
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.spacing = 24
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = .init(top: 16, left: 0, bottom: 0, right: 0)
+
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Let's Get Started!"
@@ -94,6 +105,25 @@ class LoginViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let nextButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .green
+        config.baseForegroundColor = .black
+        config.cornerStyle = .medium
+        //internal padding
+        config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20)
+        
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        config.attributedTitle = AttributedString("Next", attributes: container)
+        
+        let btn = UIButton(configuration: config)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
+        return btn
     }()
     
 
