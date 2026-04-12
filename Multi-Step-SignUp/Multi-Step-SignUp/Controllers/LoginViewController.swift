@@ -10,12 +10,24 @@ import UIKit
 class LoginViewController: UIViewController {
     
     lazy var mainStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,emailField,passwordField])
+       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel])
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.spacing = 8
+        stack.spacing = 4
         stack.backgroundColor = .secondarySystemBackground
         
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    lazy var userInfoStack: UIStackView = {
+       let stack = UIStackView(arrangedSubviews: [emailField,passwordField])
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.spacing = 24
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = .init(top: 16, left: 0, bottom: 0, right: 0)
+
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -70,6 +82,18 @@ class LoginViewController: UIViewController {
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         return passwordField
+    }()
+    
+    let passwordHintLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Password should be at least 8 characters long including uppercase letters, lowercase letters, numbers, and special."
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = .systemGray
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
 
