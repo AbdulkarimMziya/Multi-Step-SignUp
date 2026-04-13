@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    let fullnameField: UIView = {
+    let fullnameField: CustomTextField = {
         let header = "Full Name"
         let placeholder = "Full Name"
         let iconName = "person"
@@ -125,7 +125,7 @@ class ProfileViewController: UIViewController {
         return rb
     }()
     
-    let employmentField: UIView = {
+    let employmentField: CustomTextField = {
         let header = "Employment Status"
         let placeholder = "Employment Status"
         let iconName = "bag"
@@ -176,6 +176,9 @@ class ProfileViewController: UIViewController {
         maleRadioButton.radioButton.addTarget(self, action: #selector(genderTapped), for: .touchUpInside)
         femaleRadioButton.radioButton.addTarget(self, action: #selector(genderTapped), for: .touchUpInside)
         otherRadioButton.radioButton.addTarget(self, action: #selector(genderTapped), for: .touchUpInside)
+        
+        fullnameField.textField.delegate = self
+        employmentField.textField.delegate = self
     }
 
     func addViews() {
