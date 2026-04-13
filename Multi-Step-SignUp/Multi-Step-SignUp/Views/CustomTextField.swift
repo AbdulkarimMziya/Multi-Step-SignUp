@@ -9,6 +9,21 @@ import UIKit
 
 class CustomTextField: UIView {
     
+    var text: String? {
+        get { return textField.text }
+        set { textField.text = newValue }
+    }
+    
+    var inputViewOverride: UIView? {
+        get { return textField.inputView }
+        set { textField.inputView = newValue }
+    }
+
+    var inputAccessoryViewOverride: UIView? {
+        get { return textField.inputAccessoryView }
+        set { textField.inputAccessoryView = newValue }
+    }
+
     lazy var mainStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [headerLabel,textField])
         stack.axis = .vertical
@@ -26,7 +41,7 @@ class CustomTextField: UIView {
         return label
     }()
     
-    private let textField: UITextField = {
+    let textField: UITextField = {
         let field = UITextField()
         field.textColor = .white
         field.textAlignment = .natural
