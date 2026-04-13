@@ -78,7 +78,7 @@ class ProfileViewController: UIViewController {
         return emailField
     }()
     
-    let dobField: UIView = {
+    let dobField: CustomTextField = {
         let header = "Date Of Birth"
         let placeholder = "Date Of Birth"
         let iconName = "calendar.badge.plus"
@@ -161,13 +161,15 @@ class ProfileViewController: UIViewController {
         return btn
     }()
     
+    let datePicker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .greyBackground
 
         addViews()
         setupConstraints()
-        
+        setupDatePicker()
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
 
@@ -178,6 +180,7 @@ class ProfileViewController: UIViewController {
         femaleRadioButton.configure(title: "Female")
         otherRadioButton.configure(title: "Other")
     }
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -187,6 +190,39 @@ class ProfileViewController: UIViewController {
             radioButtonStack.heightAnchor.constraint(equalToConstant: 144)
         ])
     }
+    
+    func setupDatePicker() {
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        
+        // Using your CustomTextField overrides
+        dobField.inputViewOverride = datePicker
+        dobField.inputAccessoryViewOverride = createToolbar()
+    }
+    
+    func createToolbar() -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.barStyle = .black
+        
+        // Pushes the 'Done' button to the right
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        return toolbar
+    }
+
+    @objc func donePressed() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        // Assuming dobField is your CustomTextField
+        dobField.text = formatter.string(from: datePicker.date)
+
+        view.endEditing(true)
+    }
+
     
     @objc
     func nextButtonTapped() {
