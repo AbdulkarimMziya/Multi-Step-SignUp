@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    let emailField: UIView = {
+    let emailField: CustomTextField = {
         let header = "Email Address"
         let placeholder = "example@mail.com"
         let iconName = "envelope"
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
         return emailField
     }()
     
-    let passwordField: UIView = {
+    let passwordField: CustomTextField = {
         let header = "New Password"
         let placeholder = ""
         let iconName = "lock"
@@ -136,6 +136,9 @@ class LoginViewController: UIViewController {
         setupConstraints()
         
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        
+        emailField.textField.delegate = self
+        passwordField.textField.delegate = self
     }
     
     func addViews() {
@@ -151,10 +154,9 @@ class LoginViewController: UIViewController {
     
     @objc
     func nextButtonTapped() {
-        let profileVC = UIViewController()
+        let profileVC = ProfileViewController()
         navigationItem.hidesBackButton = true
         navigationController?.pushViewController(profileVC, animated: true)
-       
     }
 
 
