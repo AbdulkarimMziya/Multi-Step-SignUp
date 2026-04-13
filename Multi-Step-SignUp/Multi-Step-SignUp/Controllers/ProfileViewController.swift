@@ -170,7 +170,12 @@ class ProfileViewController: UIViewController {
         addViews()
         setupConstraints()
         setupDatePicker()
+        
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        
+        maleRadioButton.radioButton.addTarget(self, action: #selector(genderTapped), for: .touchUpInside)
+        femaleRadioButton.radioButton.addTarget(self, action: #selector(genderTapped), for: .touchUpInside)
+        otherRadioButton.radioButton.addTarget(self, action: #selector(genderTapped), for: .touchUpInside)
     }
 
     func addViews() {
@@ -221,6 +226,29 @@ class ProfileViewController: UIViewController {
         dobField.text = formatter.string(from: datePicker.date)
 
         view.endEditing(true)
+    }
+    
+    @objc
+    func genderTapped(_ sender: UIButton) {
+        // 1. Reset all to unselected
+        maleRadioButton.setSelected(false, color: .greyBackground)
+        femaleRadioButton.setSelected(false, color: .greyBackground)
+        otherRadioButton.setSelected(false, color: .greyBackground)
+        
+        // 2. Find which one was tapped and select it
+        switch(sender) {
+        case maleRadioButton.radioButton:
+            maleRadioButton.setSelected(true, color: .radioGreen)
+        case femaleRadioButton.radioButton:
+            femaleRadioButton.setSelected(true, color: .radioBlue)
+        case otherRadioButton.radioButton:
+            otherRadioButton.setSelected(true, color: .radioPink)
+        default:
+            maleRadioButton.setSelected(false, color: .greyBackground)
+            femaleRadioButton.setSelected(false, color: .greyBackground)
+            otherRadioButton.setSelected(false, color: .greyBackground)
+        }
+        
     }
 
     

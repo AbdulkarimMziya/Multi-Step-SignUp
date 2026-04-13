@@ -67,4 +67,12 @@ class RadioButton: UIView {
         radioButton.configuration?.attributedTitle = AttributedString(title, attributes: container)
     }
     
+    func setSelected(_ isSelected: Bool, color: UIColor) {
+        let iconName = isSelected ? "circle.circle.fill" : "circle"
+        radioButton.configuration?.image = UIImage(systemName: iconName)
+        
+        frameView.backgroundColor = color
+        frameView.layer.borderWidth = isSelected ? 2 : 1
+    }
+    
 }
