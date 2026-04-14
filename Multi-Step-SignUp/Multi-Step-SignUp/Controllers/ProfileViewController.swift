@@ -261,5 +261,8 @@ class ProfileViewController: UIViewController {
         verificationVC.navigationItem.hidesBackButton = true
         navigationController?.pushViewController(verificationVC, animated: true)
        
+        if let progressBar = navigationController?.navigationBar.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
+            progressBar.setProgress(0.66, animated: true)
+        }
     }
 }
