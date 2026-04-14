@@ -9,6 +9,8 @@ import UIKit
 
 class VerificationViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
+    
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [verificationTitleLabel,verificationSubTitleLabel,nextButton])
         stack.axis = .vertical
