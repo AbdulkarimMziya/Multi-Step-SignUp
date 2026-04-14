@@ -19,6 +19,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigation = UINavigationController(rootViewController: LoginViewController())
         
+        // 1. Setup the Progress Bar
+        let progressBar = UIProgressView(progressViewStyle: .default)
+        progressBar.progressTintColor = .limeGreen
+        progressBar.trackTintColor = .systemGray4
+        progressBar.progress = 0.02
+        progressBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 2. Add to Navigation Bar
+        navigation.navigationBar.addSubview(progressBar)
+        
+        // 3. Constraints to pin it to the bottom
+        NSLayoutConstraint.activate([
+            progressBar.leadingAnchor.constraint(equalTo: navigation.navigationBar.leadingAnchor ,constant: 20),
+            progressBar.trailingAnchor.constraint(equalTo: navigation.navigationBar.trailingAnchor,constant: -20),
+            progressBar.centerYAnchor.constraint(equalTo: navigation.navigationBar.centerYAnchor),
+            progressBar.heightAnchor.constraint(equalToConstant: 8)
+        ])
+        
         window.rootViewController = navigation
         
         self.window = window
