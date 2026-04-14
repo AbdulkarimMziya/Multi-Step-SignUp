@@ -9,6 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
+    
     lazy var mainStack: UIStackView = {
        let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel,nextBtnStack,sectionDivider,actionBtnsStack])
         stack.axis = .vertical
@@ -215,9 +217,7 @@ class LoginViewController: UIViewController {
     
     @objc
     func nextButtonTapped() {
-        let profileVC = ProfileViewController()
-        profileVC.navigationItem.hidesBackButton = true
-        navigationController?.pushViewController(profileVC, animated: true)
+        coordinator?.showProfilePage()
         
         if let progressBar = navigationController?.navigationBar.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
             progressBar.setProgress(0.33, animated: true)

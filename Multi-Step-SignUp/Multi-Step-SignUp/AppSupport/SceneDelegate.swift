@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var coordinator: MainCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let navigation = UINavigationController(rootViewController: LoginViewController())
+        let navigation = UINavigationController()
+        
+        coordinator = MainCoordinator(navigationController: navigation)
         
         // 1. Setup the Progress Bar
         let progressBar = UIProgressView(progressViewStyle: .default)
@@ -36,6 +40,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             progressBar.centerYAnchor.constraint(equalTo: navigation.navigationBar.centerYAnchor),
             progressBar.heightAnchor.constraint(equalToConstant: 8)
         ])
+        
+        coordinator?.start()
         
         window.rootViewController = navigation
         

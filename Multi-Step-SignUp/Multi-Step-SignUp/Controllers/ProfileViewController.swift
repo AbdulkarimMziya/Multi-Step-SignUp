@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
+    
     lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [profileTitleLabel,profileSubTitleLabel,fullnameField,dobField,genderStack,employmentField, nextButton])
         stack.axis = .vertical
@@ -257,9 +259,7 @@ class ProfileViewController: UIViewController {
     
     @objc
     func nextButtonTapped() {
-        let verificationVC = VerificationViewController()
-        verificationVC.navigationItem.hidesBackButton = true
-        navigationController?.pushViewController(verificationVC, animated: true)
+        coordinator?.showVerificationPage()
        
         if let progressBar = navigationController?.navigationBar.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
             progressBar.setProgress(0.66, animated: true)
