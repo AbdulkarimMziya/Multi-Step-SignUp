@@ -10,7 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     lazy var mainStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel, nextBtnStack])
+       let stack = UIStackView(arrangedSubviews: [loginTitleLabel,loginSubTitleLabel,userInfoStack,passwordHintLabel,nextBtnStack,sectionDivider,actionBtnsStack])
         stack.axis = .vertical
         stack.alignment = .fill
         stack.spacing = 4
@@ -42,6 +42,19 @@ class LoginViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    lazy var actionBtnsStack: UIStackView = {
+       let stack = UIStackView(arrangedSubviews: [appleButton, googleButton])
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.spacing = 24
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = .init(top: 16, left: 0, bottom: 0, right: 0)
+
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     let loginTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Let's Get Started!"
@@ -127,6 +140,54 @@ class LoginViewController: UIViewController {
         return btn
     }()
     
+    let sectionDivider = SectionDivider()
+    
+    let appleButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.image = UIImage(systemName: "apple.logo")
+        config.imagePadding = 12
+        config.baseBackgroundColor = UIColor.clear
+        config.baseForegroundColor = .white
+        config.cornerStyle = .large
+        //internal padding
+        config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20)
+        
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        config.attributedTitle = AttributedString("Continue with Apple", attributes: container)
+        
+        let btn = UIButton(configuration: config, primaryAction: .none)
+        btn.layer.borderWidth = 2
+        btn.layer.borderColor = UIColor.systemGray4.cgColor
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
+        return btn
+    }()
+    
+    let googleButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.image = UIImage(systemName: "g.circle.fill")
+        config.imagePadding = 12
+        config.baseBackgroundColor = UIColor.clear
+        config.baseForegroundColor = .white
+        config.cornerStyle = .large
+        //internal padding
+        config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20)
+        
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        config.attributedTitle = AttributedString("Continue with Google", attributes: container)
+        
+        let btn = UIButton(configuration: config, primaryAction: .none)
+        btn.layer.borderWidth = 2
+        btn.layer.borderColor = UIColor.systemGray4.cgColor
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        
+        return btn
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,8 +216,12 @@ class LoginViewController: UIViewController {
     @objc
     func nextButtonTapped() {
         let profileVC = ProfileViewController()
-        navigationItem.hidesBackButton = true
+        profileVC.navigationItem.hidesBackButton = true
         navigationController?.pushViewController(profileVC, animated: true)
+        
+        if let progressBar = navigationController?.navigationBar.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
+            progressBar.setProgress(0.33, animated: true)
+        }
     }
 
 
